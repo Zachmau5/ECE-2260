@@ -1,0 +1,69 @@
+#!/usr/bin/python3
+import numpy as np
+
+def det_3x3(x):
+    sm1= x[np.ix_([1,2],[1,2])]
+    sm2= x[np.ix_([1,2],[0,2])]
+    sm3= x[np.ix_([1,2],[0,1])]
+    D = x[0,0]*det_2x2(sm1)-x[0,1]*det_2x2(sm2)+x[0,2]*det_2x2(sm3)
+    return D
+
+def det_2x2(x):
+    D = x[0,0]*x[1,1]-x[1,0]*x[0,1]
+    return D
+
+def cramer_2x2(A,B):
+    A1 = np.copy(A)
+    A2 = np.copy(A)
+
+    A1[:,0] = B
+    A2[:,1] = B
+
+    x= det_2x2(A1)/det_2x2(A)
+    y= det_2x2(A2)/det_2x2(A)
+
+    return (x,y)
+
+def cramer_3x3(A,B):
+    A1 = np.copy(A)
+    A2 = np.copy(A)
+    A3= np.copy(A)
+
+
+    A1[:,0] = B
+    A2[:,1] = B
+    A3[:,2] = B
+    
+    x=det_3x3(A1)/det_3x3(A)
+    y=det_3x3(A2)/det_3x3(A)
+    z=det_3x3(A3)/det_3x3(A)
+
+    return (x,y,z)
+
+    
+def main():
+    input_3x3 = np.array([[1,52,2],
+                         [12,65,3],
+                         [9,5,2]])
+    soln_3x3 = np.array([[4,8,2]])
+#printing det of 3x3
+    print("Det of 3x3=",det_3x3(input_3x3))
+    print("coded det of 3x3=\t",np.linalg.det(input_3x3))
+#print soln of 3x3
+    print("coded 3x3\t",cramer_3x3(input_3x3,soln_3x3))
+    fuck_me=np.linalg.solve(input_3x3,np.transpose(soln_3x3))
+    print("3x3 linalg\t",fuck_me)
+   # print("calc soln of 3x3\t",np.linalg.solve(input_3x3,soln_3x3))
+    
+    input_2x2 = np.array([[2,3],
+                          [4,5]])
+    soln_2x2 = np.array([2,3])
+#print det of 2x2
+    print("coded det of 2x2\t",det_2x2(input_2x2))
+    print("calc det of 2x2\t",np.linalg.det(input_2x2))
+#print of soln 2x2
+    print("coded soln 2x2\t",cramer_2x2(input_2x2,soln_2x2))
+    print("calc soln of 2x2\t",np.linalg.solve(input_2x2,soln_2x2))
+
+if __name__=="__main__":
+    main()
