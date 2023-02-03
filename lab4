@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+import numpy as np
+def calc(A,b):
+
+    A[0,0]=input("first x value: ")
+    A[0,1]=input("first y value: ")
+    A[0,2]=input("first z value: ")
+    b[0,0]=input("first soln value: ")
+    A[1,0]=input("second x value: ")
+    A[1,1]=input("second y value: ")
+    A[1,2]=input("second z value: ")
+    b[0,1]=input("second soln value: ")
+    A[2,0]=input("third x value: ")
+    A[2,1]=input("third y value: ")
+    A[2,2]=input("third z value: ")
+    b[0,2]=input("third soln value: ")
+    b=np.swapaxes(b,0,1)
+    soln=np.linalg.solve(A,b)
+    return soln
+    calc()
+def main():
+    A = np.array([[100,52,2j],
+                  [12,65,3],
+                  [9,5,2]])
+    b = np.array([[4j,8,2]])
+
+    print(calc(A,b))
+
+if __name__=="__main__":
+    main()
