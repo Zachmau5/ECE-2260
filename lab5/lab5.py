@@ -9,7 +9,7 @@ def main():
     plt.xlabel("Time    [s]")
     plt.ylabel(r"$V_{0}(t)$    [V]")
     plt.title(r"$V_{0}(t)$ with respect to time")
-    plt.text(0.002,1,("Found value of tau {:.2e}".format(find_time_constant(t, f_t))))
+    plt.text(0.002,1,("Found value of tau: {:.2e}".format(find_time_constant(t, f_t))))
     #print (tau)
     plt.show()
     #print(find_time_constant(t, f_t))
