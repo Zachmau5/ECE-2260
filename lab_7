@@ -12,11 +12,11 @@ import pandas as pd
 df=pd.read_excel('Lab 7.xlsx',sheet_name='Sheet1')
 df=np.array(df)
 
-#Calculates Impedences from a series circuit
+#Calculates Impedances from a series circuit
 def Zs(R,L,C,f):
     z=R+(-1j/(C*f*2*np.pi))+(L*1j*f*2*np.pi)
     return z
-#Calculates Impedences from a parallel circuit
+#Calculates Impedances from a parallel circuit
 def Zp(R,L,C,f):
     z=1/(1/R+((C*2*np.pi*f)/(-1j))+(1/(1j*2*np.pi*f*L)))
     return z
