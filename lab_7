@@ -46,12 +46,11 @@ def main():
     axs[1].set_xlabel("Frequency (Hz)")
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
-    # axs[0].set_title("Magnitude")
     axs[0].plot(f,Mag)
     axs[1].set_yticks([-100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100])
     axs[1].set_xscale('log')
-    #axs[1].set_title("Angle")
     axs[1].plot(f,Ang)
+    plt.savefig('Series_Circuit.png')
     plt.show()
     
     # Second Graph plot
@@ -70,6 +69,7 @@ def main():
     axs[1].set_yticks([-100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100])
     axs[1].set_xscale('log')
     axs[1].plot(f,Angp)
+    plt.savefig('Parallel_Circuit.png')
     plt.show()
     
     i=input("Please Enter 'series' or 'parallel': ")
