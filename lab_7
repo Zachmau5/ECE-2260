@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import numpy as np
 import matplotlib.pyplot as plt
-
 #Calculates Impedences from a series circuit
 def Zs(R,L,C,f):
     z=R+(-1j/(C*f*2*np.pi))+(L*1j*f*2*np.pi)
@@ -13,19 +12,27 @@ def Zp(R,L,C,f):
 #Calculates the max/min from the array
 def find_omega_o(Z,omega, circuit_type):
     if circuit_type=="parallel":
-        print("parallel")
+        print("Parallel")
         mx=np.argmax(np.absolute(Z))
         omega_o=omega[mx]
         f_o=omega_o/(2*np.pi)
+        omega_o = "{:.2f}".format(omega_o)
+        omega_o=("\u03C9\u2080 is: "+str(omega_o)+" rad/sec")
+        f_o="f\u2080 {:.2f} Hz".format(f_o)
         return omega_o,f_o
     elif circuit_type=="series":
-        print("series")
+        print("Series")
         mn=np.argmin(np.absolute(Z))
         omega_o=omega[mn]
         f_o=omega_o/(2*np.pi)
+        omega_o = "{:.2f}".format(omega_o)
+        omega_o=("\u03C9\u2080 is: "+str(omega_o)+" rad/sec")
+        f_o="f\u2080 {:.2f} Hz".format(f_o)
         return omega_o,f_o
     else:
         print("Format must be, Array, Array, String")
+    #else:
+        #print("Format must be, Array, Array, String")
 
 def main():
     f=np.logspace(3,5,num=2000)
@@ -42,13 +49,15 @@ def main():
     axs[0].set_ylabel("Magnitude")
     axs[0].set_title("Series Circuit")
     axs[1].set_ylabel("Phase (degrees)")
-    axs[0].set_xlabel("Frequency (Hz)")
+    #axs[0].set_xlabel("Frequency (Hz)")
     axs[1].set_xlabel("Frequency (Hz)")
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
+    # axs[0].set_title("Magnitude")
     axs[0].plot(f,Mag)
     axs[1].set_yticks([-100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100])
     axs[1].set_xscale('log')
+    #axs[1].set_title("Angle")
     axs[1].plot(f,Ang)
     plt.savefig('Series_Circuit.png')
     plt.show()
@@ -61,7 +70,6 @@ def main():
     axs[0].set_ylabel("Magnitude")
     axs[0].set_title("Parallel Circuit")
     axs[1].set_ylabel("Phase (degrees)")
-    axs[0].set_xlabel("Frequency (Hz)")
     axs[1].set_xlabel("Frequency (Hz)")
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
@@ -71,15 +79,19 @@ def main():
     axs[1].plot(f,Angp)
     plt.savefig('Parallel_Circuit.png')
     plt.show()
-    
-    i=input("Please Enter 'series' or 'parallel': ")
-    if i=="parallel":
-        Z=parallel
-        print(find_omega_o(Z, (f*2*np.pi), "{}".format(i)))
-    elif i=="series":
-        Z=series
-        print(find_omega_o(Z, (f*2*np.pi), "{}".format(i)))
-    else:
-        print("'series' and 'parallel' are the only valid inputs, they are case sensitive")
+        
+   
+    def calc(i):
+        if i=="parallel":
+            Z=parallel
+            print(find_omega_o(Z, (f*2*np.pi), "{}".format(i)))
+        elif i=="series":
+            Z=series
+            print(find_omega_o(Z, (f*2*np.pi), "{}".format(i)))
+        else:
+            print("'seres' and 'parallel' are the only valid inputs, they are case sensitive")
+    calc('parallel')
+    calc('series')
+
 if __name__ == '__main__':
     main()
