@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Mar 30 19:43:31 2023
+
+@author: halle
+"""
+
 #!/usr/bin/python3
 
 import scipy
@@ -34,7 +41,8 @@ def graph(t,f):
     plt.ylabel('f(t)')
 
 def main():
-    fig = plt.figure(figsize=(10, 10))
+    fig = plt.figure(figsize=(15, 15))
+    fig.suptitle("Inverse Laplace Transforms",fontsize=50)
     #Real and Distinct
     print('Real and Distint #')
     n=np.array([0,96,1632,5760])
@@ -43,9 +51,10 @@ def main():
     u=((120-72*(np.exp(-8*t))+48*(np.exp(-6*t))))
     f=(inverse_laplace(n,d,t))
     plt.subplot(2,2,1)
+    plt.ylabel("h (t)",fontsize=20)
     plt.plot(t,f,linewidth=6)
-    plt.plot(t,u,":",linewidth=4)
-    plt.title('Real and Distinct vs Time')
+    plt.plot(t,u,":",linewidth=5)
+    plt.title('Real and Distinct vs Time',fontsize=23)
 
     #Imaginary and distinct
     print('Imaginary and Distint #')
@@ -56,8 +65,8 @@ def main():
     f=(inverse_laplace(n,d,t))
     plt.subplot(2,2,2)
     plt.plot(t,f,linewidth=6)
-    plt.plot(t,u,":",linewidth=4)
-    plt.title('Imaginary and Distinct vs Time')
+    plt.plot(t,u,":",linewidth=5)
+    plt.title('Imaginary and Distinct vs Time',fontsize=23)
 
     #Real Repeated
     print('Real and Repeated #')
@@ -67,9 +76,11 @@ def main():
     d=np.array([1, 15, 75, 125, 0])
     f=inverse_laplace(n,d,t)
     plt.subplot(2,2,3)
+    plt.xlabel("time (s)",fontsize=20)
+    plt.ylabel("h (t)",fontsize=20)
     plt.plot(t,f,linewidth=6)
-    plt.plot(t,u,":",linewidth=4)
-    plt.title('Real and Repeated vs Time')
+    plt.plot(t,u,":",linewidth=5)
+    plt.title('Real and Repeated vs Time',fontsize=23)
 
     #Imaginary Repeated
     print('Imaginary and Repeated #')
@@ -79,9 +90,10 @@ def main():
     d=np.array([1, 12, 86, 300, 625])
     f=inverse_laplace(n,d,t)
     plt.subplot(2,2,4)
+    plt.xlabel("time (s)",fontsize=20)
     plt.plot(t,f,linewidth=6)
-    plt.plot(t,u,":",linewidth=4)
-    plt.title('Imaginary and Repeated vs Time')
+    plt.plot(t,u,":",linewidth=5)
+    plt.title('Imaginary and Repeated vs Time',fontsize=23)
     plt.savefig("output.png")
     plt.show()
 
